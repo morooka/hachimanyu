@@ -1,5 +1,4 @@
 #include "testApp.h"
-
 #include "ofxUGen.h"
 
 int synthX1 = 0;
@@ -39,18 +38,16 @@ public:
 		envgen.addDoneActionReceiver(this);
 		
 		amp = SinOsc::AR(ofRandom(4.0), 0, 0.5, 0.5) * envgen;
-        
         amp1 = amp.getValue();
-		
-		Out(
-			Pan2::AR(SinOsc::AR(freq) * amp, pan)
+        Out(
+            Pan2::AR(SinOsc::AR(freq) * amp, pan)
             );
-	}
+    }
 	
 	void draw()
 	{
 		ofNoFill();
-		ofSetColor(255,130,110,100);
+        ofSetColor(255,130,110,100);
         ofCircle(pos.x, pos.y, 10+ofRandom(0,80));
     }
 	
@@ -82,7 +79,6 @@ public:
 		envgen.addDoneActionReceiver(this);
 		
 		amp = SinOsc::AR(ofRandom(10.0), 0, 0.5, 0.5) * envgen;
-        
         amp2 = amp.getValue();
 		
 		Out(
@@ -125,7 +121,6 @@ public:
 		envgen.addDoneActionReceiver(this);
 		
 		amp = SinOsc::AR(ofRandom(5.0), 0, 0.1, 0.1) * envgen;
-        
         amp3 = amp.getValue();
 		
 		Out(
@@ -207,13 +202,13 @@ void testApp::setup(){
     vidGrabber.initGrabber(640, 480);
     
     colorImg.allocate(kinect.width, kinect.height);
-	grayImage.allocate(kinect.width, kinect.height);
+    grayImage.allocate(kinect.width, kinect.height);
     grayBg.allocate(kinect.width, kinect.height);
     graydiff.allocate(kinect.width, kinect.height);
     
     // enable depth->video image calibration
-	kinect.setRegistration(true);
-	kinect.init(true,false,true);
+    kinect.setRegistration(true);
+    kinect.init(true,false,true);
     kinect.open();
        
     threshold = 255;
@@ -230,21 +225,20 @@ void testApp::setup(){
     centroidY4 = 0;
        
     colorImg2.allocate(kinect.width, kinect.height);
-	grayImage2.allocate(kinect.width, kinect.height);
+    grayImage2.allocate(kinect.width, kinect.height);
     grayBg2.allocate(kinect.width, kinect.height);
     graydiff2.allocate(kinect.width, kinect.height);
     
     grayThreshNear.allocate(kinect.width, kinect.height);
-	grayThreshFar.allocate(kinect.width, kinect.height);
+    grayThreshFar.allocate(kinect.width, kinect.height);
 
-    
     ofxUGen::instance().setup();
     
     mainOutputSyphonServer.setName("Main Output");
     
     nearThreshold = 227;
-	farThreshold =197;
-	bThreshWithOpenCV = true;
+    farThreshold =197;
+    bThreshWithOpenCV = true;
    
     // zero the tilt on startup
 	angle = 1;
@@ -258,22 +252,17 @@ void testApp::setup(){
     bVboDraw = false;
     bsoundOn = false;
     
-   // 
     zoomTarget = zoom = 20;
     cam.setDistance(zoom);
      for (int i=0; i<NUM_BILLBOARDS; i++) {
          billboardVels[i].set(ofRandomf(), -1.0, ofRandomf());
-        // billboardVels[i].set(0, 0, 0);
          billboardVerts[i].set(ofRandom(-500, 500), ofRandom(-500, 500), ofRandom(-500, 500));
-        // billboardVerts[i].set(0, 0,0);
          billboardColor[i].set(1, 1, 1, 0.7);
      }
     billboardVbo.setVertexData(billboardVerts, NUM_BILLBOARDS, GL_DYNAMIC_DRAW);
     billboardVbo.setColorData(billboardColor, NUM_BILLBOARDS, GL_DYNAMIC_DRAW);
-   //
    
     ofDisableArbTex();
-
 }
 
 //--------------------------------------------------------------
@@ -296,7 +285,6 @@ void testApp::update(){
         graydiff2.absDiff(grayBg2,grayImage2);
         graydiff2.threshold(threshold);
         contourFinder2.findContours(graydiff2, 10, (kinect.width*kinect.height)/3, 5, false);
-        
 		
 		if(bThreshWithOpenCV) {
 			grayThreshNear = grayImage;
@@ -306,10 +294,8 @@ void testApp::update(){
 			cvAnd(grayThreshNear.getCvImage(), grayThreshFar.getCvImage(), grayImage.getCvImage(), NULL);
             
 		} else {
-			
 			// or we do it ourselves - show people how they can work with the pixels
 			unsigned char * pix = grayImage.getPixels();
-			
 			int numPixels = grayImage.getWidth() * grayImage.getHeight();
 			for(int i = 0; i < numPixels; i++) {
 				if(pix[i] < nearThreshold && pix[i] > farThreshold) {
@@ -398,7 +384,7 @@ void testApp::update(){
 void testApp::draw(){
     glShadeModel(GL_SMOOTH);
     glEnable(GL_LINE_SMOOTH);
-	glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
+    glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
     ofSetLineWidth(1);
     ofTranslate(0, 640);
     ofRotateZ(-90);

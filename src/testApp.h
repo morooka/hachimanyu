@@ -30,14 +30,13 @@ class testApp : public ofBaseApp{
     bool            LearnBakground,bGrayImage,bfeedback,bImage;
     
     ofxCvColorImage     colorImg,colorImg2;
-	ofxCvGrayscaleImage grayImage,grayImage2; // grayscale depth image
-	ofxCvGrayscaleImage grayThreshNear; // the near thresholded image
-	ofxCvGrayscaleImage grayThreshFar; // the far thresholded image
-	ofxCvGrayscaleImage graydiff,grayBg,graydiff2,grayBg2;
+    ofxCvGrayscaleImage grayImage,grayImage2; // grayscale depth image
+    ofxCvGrayscaleImage grayThreshNear; // the near thresholded image
+    ofxCvGrayscaleImage grayThreshFar; // the far thresholded image
+    ofxCvGrayscaleImage graydiff,grayBg,graydiff2,grayBg2;
     
-	ofxCvContourFinder contourFinder,contourFinder2;
+    ofxCvContourFinder contourFinder,contourFinder2;
     ofVideoGrabber      vidGrabber,vidGrabber2;
-    
     int                       threshold,threshold2;
     bool				bLearnBakground,bDrawDual,bVboDraw;
     
@@ -52,8 +51,7 @@ class testApp : public ofBaseApp{
     int 				camWidth;
     int 				camHeight;
     
-  ofxSyphonServer mainOutputSyphonServer;
-    
+    ofxSyphonServer mainOutputSyphonServer;
     ofxKinect kinect;
     
     bool bThreshWithOpenCV;
