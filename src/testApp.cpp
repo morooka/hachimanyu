@@ -51,16 +51,8 @@ public:
 	{
 		ofNoFill();
 		ofSetColor(255,130,110,100);
-		//ofCircle(pos.x, pos.y, amp.getValue() * 100);
         ofCircle(pos.x, pos.y, 10+ofRandom(0,80));
-        
-		
-		/*ofNoFill();
-		ofSetColor(255,130,110,100);
-		//ofCircle(pos.x, pos.y, amp.getValue() * 200+40);
-        ofCircle(pos.x, pos.y, 40+ofRandom(0,20));
-         */
-	}
+    }
 	
 	bool isAlive()
 	{
@@ -100,18 +92,9 @@ public:
 	
 	void draw()
 	{
-         ofNoFill();
-         ofSetColor(100,100,255,100);
-        // ofCircle(pos.x, pos.y, amp.getValue() * 100);
+        ofNoFill();
+        ofSetColor(100,100,255,100);
         ofCircle(pos.x, pos.y,10+ofRandom(0,80));
-
-        
-		
-		/*ofNoFill();
-		ofSetColor(100,100,255,100);
-		ofCircle(pos.x, pos.y, amp.getValue() * 200+40);
-        ofCircle(pos.x, pos.y, 50+ofRandom(0,30));
-         */
 	}
 	
 	bool isAlive()
@@ -119,6 +102,7 @@ public:
 		return !Out().isNull();
 	}
 };
+
 class MySynth3 : public ofxUGen::SynthDef
 {
 public:
@@ -151,19 +135,17 @@ public:
 	
 	void draw()
 	{
-         ofNoFill();
-         ofSetColor(50,255,87,150);
-       //  ofCircle(pos.x, pos.y, amp.getValue() * 100);
+        ofNoFill();
+        ofSetColor(50,255,87,150);
         ofCircle(pos.x, pos.y, 30+ofRandom(0,20));
-         
-		
-        }
+    }
 	
 	bool isAlive()
 	{
 		return !Out().isNull();
 	}
 };
+
 class MySynth4 : public ofxUGen::SynthDef
 {
 public:
@@ -198,10 +180,7 @@ public:
 	{
         ofNoFill();
         ofSetColor(210,150,220,150);
-        //  ofCircle(pos.x, pos.y, amp.getValue() * 100);
         ofCircle(pos.x, pos.y, 30+ofRandom(0,20));
-        
-		
     }
 	
 	bool isAlive()
@@ -350,7 +329,6 @@ void testApp::update(){
     }
     
     for (blob=contourFinder.blobs.begin(); blob!= contourFinder.blobs.end(); blob++) {
-   
         centroidX1 = contourFinder.blobs[0].centroid.x;
         centroidY1 = contourFinder.blobs[0].centroid.y;
         centroidX2 = contourFinder.blobs[1].centroid.x;
@@ -359,25 +337,19 @@ void testApp::update(){
         centroidY3 = contourFinder.blobs[2].centroid.y;
         centroidX4 = contourFinder.blobs[3].centroid.x;
         centroidY4 = contourFinder.blobs[3].centroid.y;
-        
         synthX1 = centroidX1;
         synthY1 = centroidY1+480;
         synthX2 = centroidX2;
         synthY2 = centroidY2+480;
         synthX4 = centroidX3;
         synthY4 = centroidY3+480;
-        
-        //cF1size = contourFinder.blobs[0].area*1000;
-        //cF2size = contourFinder.blobs[1].area*100;
     }
     
     for (blob2=contourFinder2.blobs.begin(); blob2!= contourFinder2.blobs.end(); blob2++) {
-        
         centroidX12 = contourFinder2.blobs[0].centroid.x;
         centroidY12 = contourFinder2.blobs[0].centroid.y;
         synthX5 = centroidX22 = contourFinder2.blobs[1].centroid.x;
         synthY5 = centroidY22 = contourFinder2.blobs[1].centroid.y;
-        
         synthX3 = centroidX12;
         synthY3 = centroidY12;
     }
@@ -386,66 +358,39 @@ void testApp::update(){
     if (vidGrabber.isFrameNew()) {
         videoImage.setFromPixels(vidGrabber.getPixels(),640,480, OF_IMAGE_COLOR);
     }
+    
     float t   = (ofGetElapsedTimef()) * 0.9f;
     float div = 250.0;
-    
-   /* for (int i=0; i<NUM_BILLBOARDS; i++) {
-        ofVec3f vec(ofSignedNoise(t, billboardVerts[i].y/div, billboardVerts[i].z/div),
-                    ofSignedNoise(billboardVerts[i].x/div, t, billboardVerts[i].z/div),
-                    ofSignedNoise(billboardVerts[i].x/div, billboardVerts[i].y/div, t));
-        vec *= 0.3f;
-        billboardVels[i] += vec;
-        billboardVerts[i] += billboardVels[i];
-        billboardVels[i]  *= 0.94f;
-    }
-    */
-    
-    
-    
+  
     for (int i=0; i<contourFinder2.blobs.size(); i++) {
         for (int j = 0; j < contourFinder2.blobs[i].nPts; j++) {
         ofVec3f vec(contourFinder2.blobs[i].pts[j].x,contourFinder2.blobs[i].pts[j].y,ofRandom(-200,200));
-          /*  if (contourFinder2.nBlobs > 0) {
-                for (int k=0; k<NUM_BILLBOARDS; k++) {
-                    billboardVels[k].set(contourFinder2.blobs[i].pts[j].x,contourFinder2.blobs[i].pts[j].y, 0);
-                    // billboardVels[i].set(0, 0, 0);
-                    billboardVerts[k].set(contourFinder2.blobs[i].pts[j].x,contourFinder2.blobs[i].pts[j].y,0);
-                    // billboardVerts[i].set(0, 0,0);
-                    billboardColor[k].set(1, 1, 1, 0.7);
-                }
-             */
-        vec *= 1.0f;
-        billboardVels[i] += vec;
-        billboardVerts[i] += billboardVels[i];
-        billboardVels[i]  *= 0.94f;
-                        }
+            vec *= 1.0f;
+            billboardVels[i] += vec;
+            billboardVerts[i] += billboardVels[i];
+            billboardVels[i]  *= 0.94f;
         }
+    }
 
     billboardVbo.setVertexData(billboardVerts, NUM_BILLBOARDS, GL_DYNAMIC_DRAW);
     billboardVbo.setColorData(billboardColor, NUM_BILLBOARDS, GL_DYNAMIC_DRAW);
     zoom += (zoomTarget - zoom) * 0.03;
     
     if (bVboDraw == true) {
-        
         float movementSpeed = 0.9f;
         float t = ofGetElapsedTimef()*movementSpeed ;
         float cloudSize = ofGetWidth() / 2;
-        //float t = (ofGetElapsedTimef() * spacing) * movementSpeed;
         ofVec3f pos(
                     ofSignedNoise(t, 0, 0),
                     ofSignedNoise(0, t, 0),
                     ofSignedNoise(0, 0, t));
-        
         t = t*1000;
-        
-         pos *= cloudSize;
+        pos *= cloudSize;
         ofTranslate(pos*t);
         ofRotateX(pos.x*t*1000);
         ofRotateY(pos.y*t*1000);
         ofRotateZ(pos.z*t*1000);
     }
-    
-    
     cam.setDistance(zoom);
 }
 
@@ -461,51 +406,43 @@ void testApp::draw(){
     
     ofBackground(0);
     ofSetColor(255);
-   // hachimanyuImage.draw(synthX1-100,synthY1-150,202,300);
-   // hachimanyuImage.draw(synthX2-100,synthY2-150,202,300);
-        
-    
+  
     if (bGrayImage == false) {
         hachimanyuImage.draw(synthX1-100,synthY1-150,202,300);
         hachimanyuImage.draw(synthX2-100,synthY2-150,202,300);
         if (contourFinder.nBlobs > 2) {
             hachimanyuImage.draw(synthX4-100,synthY4-150,202,300);
         }
-
         glBlendFunc(GL_DST_COLOR, GL_ZERO);
         grayImage.draw(0,480,640,480);
-       
     }
+    
     if (bsoundOn == true) {
-    if (contourFinder.nBlobs > 0) {
-        vector<MySynth*>::iterator it = synths.begin();
-        while (it != synths.end())
-        {
-            MySynth *s = *it;
-            s->draw();
-            
-            if (!s->isAlive())
+        if (contourFinder.nBlobs > 0) {
+            vector<MySynth*>::iterator it = synths.begin();
+            while (it != synths.end())
             {
-                it = synths.erase(it);
-                delete s;
+                MySynth *s = *it;
+                s->draw();
+                if (!s->isAlive())
+                {
+                    it = synths.erase(it);
+                    delete s;
+                }
+                else
+                    it++;
             }
-            else
-                it++;
+            for (int i = 0; i < synths.size()/100; i++)
+                synths[i]->release();
+            
+            synths.push_back(new MySynth);
+            synths.back()->play();
         }
-        //for (int i = 0; i < synths.size()/5; i++)
-        for (int i = 0; i < synths.size()/100; i++)
-            synths[i]->release();
-        
-        synths.push_back(new MySynth);
-        synths.back()->play();
-    }
     }
     if (contourFinder.nBlobs > 1) {
         ofSetColor(100, 200, 200,200);
         ofSetLineWidth(2);
         ofLine(synthX1, synthY1,synthX2,synthY2);
-        
-       // ofSetColor(200, 150, 150,200);
         
         if (bsoundOn  == true) {
         vector<MySynth2*>::iterator it2 = synths2.begin();
@@ -522,37 +459,35 @@ void testApp::draw(){
             else
                 it2++;
         }
-       // for (int i = 0; i < synths2.size()/5; i++)
             for (int i = 0; i < synths2.size()/100; i++)
-            synths2[i]->release();
-        
-        synths2.push_back(new MySynth2);
-        synths2.back()->play();
-        }        
+                synths2[i]->release();
+            
+            synths2.push_back(new MySynth2);
+            synths2.back()->play();
+        }
     }
     
     if (bsoundOn == true) {
-    if (contourFinder2.nBlobs > 0) {
-        vector<MySynth3*>::iterator it3 = synths3.begin();
-        while (it3 != synths3.end())
-        {
-            MySynth3 *s = *it3;
-            s->draw();
-            
-            if (!s->isAlive())
+        if (contourFinder2.nBlobs > 0) {
+            vector<MySynth3*>::iterator it3 = synths3.begin();
+            while (it3 != synths3.end())
             {
-                it3 = synths3.erase(it3);
-                delete s;
+                MySynth3 *s = *it3;
+                s->draw();
+                
+                if (!s->isAlive())
+                {
+                    it3 = synths3.erase(it3);
+                    delete s;
+                }
+                else
+                    it3++;
             }
-            else
-                it3++;
+            for (int i = 0; i < synths3.size()/100; i++)
+                synths3[i]->release();
+            synths3.push_back(new MySynth3);
+            synths3.back()->play();
         }
-        for (int i = 0; i < synths3.size()/100; i++)
-            synths3[i]->release();
-        
-        synths3.push_back(new MySynth3);
-        synths3.back()->play();
-    }
     
     if (contourFinder2.nBlobs > 1) {
         vector<MySynth4*>::iterator it3 = synths4.begin();
@@ -601,18 +536,13 @@ void testApp::draw(){
     << "cF2 " << contourFinder2.nBlobs << endl
     <<"fps: " << ofGetFrameRate();
 	ofDrawBitmapString(reportStr.str(), 40, 20);
-    
-    
-
 }
 
 //--------------------------------------------------------------
 void testApp::drawDual(){
-   // ofPushMatrix();
     ofEnableAlphaBlending();
     ofSetColor(255, 255, 255,100);
     vidGrabber.draw(0,0,640,480);
-  //  ofPopMatrix();
     
     if(contourFinder2.nBlobs == 1){
         glEnable(GL_BLEND);
@@ -627,15 +557,12 @@ void testApp::drawDual(){
         glEnable(GL_BLEND);
         ofSetColor(255*ofRandom(1.0),255*ofRandom(1.0),255*ofRandom(1.0),100);
         ofFill();
-       // glEnable(GL_TEXTURE_2D);
         glBegin(GL_POLYGON);
         glVertex2i(centroidX22, centroidY22);
         glVertex2i(centroidX12, centroidY12);
         glVertex2i(synthX1, synthY1);
         glVertex2i(synthX2, synthY2);
         glEnd();
-      //  glDisable(GL_TEXTURE_2D);
-        
     }
 }
 //--------------------------------------------------------------
@@ -644,12 +571,6 @@ void testApp::cfDraw(){
 }
 //--------------------------------------------------------------
 void testApp::vboDraw(){
-    
-    
-     
-   // glEnable(GL_DEPTH_TEST);
-   // ofPushMatrix();
-    //ofTranslate(ofGetWidth()/2, ofGetHeight()/2, 0);
     cam.begin();
     glDepthMask(GL_FALSE);
     ofEnablePointSprites();
@@ -662,12 +583,7 @@ void testApp::vboDraw(){
     videoImage.getTextureReference().unbind();
     ofDisablePointSprites();
     glDepthMask(GL_TRUE);
-    
-   
-    
     cam.end();
-  //  ofPopMatrix();
-    
 }
 
 //--------------------------------------------------------------
@@ -677,6 +593,7 @@ void testApp::keyPressed(int key){
 		case ' ':
 			bLearnBakground = true;
 			break;
+            
 		case '+':
         case ';':
 			threshold ++;
@@ -695,13 +612,12 @@ void testApp::keyPressed(int key){
 			farThreshold ++;
 			if (farThreshold > 255) farThreshold = 255;
 			break;
-			
+            
 		case '<':
 		case ',':
 			farThreshold --;
 			if (farThreshold < 0) farThreshold = 0;
 			break;
-            
         case '/':
 			nearThreshold ++;
 			if (nearThreshold > 255) nearThreshold = 255;
@@ -721,7 +637,6 @@ void testApp::keyPressed(int key){
 			if(angle>30) angle=30;
 			kinect.setCameraTiltAngle(angle);
 			break;
-			
 		case OF_KEY_DOWN:
 			angle--;
 			if(angle<-30) angle=-30;
@@ -733,7 +648,7 @@ void testApp::keyPressed(int key){
         case 'v':
             bVboDraw = !bVboDraw;
             break;
-            case 's':
+        case 's':
             bsoundOn = !bsoundOn;
             break;
 	}
@@ -741,9 +656,6 @@ void testApp::keyPressed(int key){
         zoomTarget -= 10;
     if (key == OF_KEY_LEFT)
         zoomTarget += 10;
-    
-
-
 }
 
 //--------------------------------------------------------------

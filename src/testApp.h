@@ -79,18 +79,5 @@ ofxSyphonServer individualTextureSyphonServer;
     ofVbo billboardVbo;
     ofVec3f billboardVerts[NUM_BILLBOARDS];
     ofFloatColor billboardColor[NUM_BILLBOARDS];
-    ofVec3f billboardVels[NUM_BILLBOARDS];
-
-
-/*
- individualTextureSyphonServer.setName("Texture Output");
-
-int width = 360;
-int height = 480;
-tex.allocate(width, height, GL_RGBA); 
-
- mainOutputSyphonServer.publishScreen();
- individualTextureSyphonServer.publishTexture(&tex);
-*/
-    
+    ofVec3f billboardVels[NUM_BILLBOARDS];    
 };
